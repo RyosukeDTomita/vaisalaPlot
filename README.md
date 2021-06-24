@@ -17,6 +17,8 @@ These program are made this environment.
 ## Program List
 - [vaisalaPlot.py](https://github.com/RyosukeDTomita/vaisalaPlot/blob/master/vaisalaPlot.py): VAISALAの画面ぽい図を作成する。
 ![VAISALA](https://github.com/RyosukeDTomita/vaisalaPlot/blob/master/samplefig/20210619_2330.png "VAISALA")
+
+### おもちゃ
 - [balloonLocation.py](https://github.com/RyosukeDTomita/vaisalaPlot/blob/master/balloonLocation.py): ゾンデのGPS情報を日本地図上に表示する。
 ![balloonLocation](https://github.com/RyosukeDTomita/vaisalaPlot/blob/master/samplefig/balloon.png "ballonLocation")
 - [balloon3d.py](https://github.com/RyosukeDTomita/vaisalaPlot/blob/master/balloon3d.py): ゾンデの位置情報をGPS情報を3次元にプロットする。
@@ -29,6 +31,14 @@ These program are made this environment.
 ## How to use
 
 ```shell
-python3 vaisalaPlot.py
+python3 vaisalaPlot.py -h
+usage: vaisalaPlot.py [-h] [-i INPUT]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -i INPUT, --input INPUT
+                        Select input file
+
+python3 vaisalaPlot.py -i ../zonde/mirai_rs41_20210619_2330.txt
 ```
 

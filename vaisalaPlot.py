@@ -1,9 +1,9 @@
 ##########################################################################
-# Name: vaisaraPlot.py
+# Name: vaisalaPlot.py
 #
+# Make VAISALA like graph.
 #
-#
-# Usage:
+# Usage: python3 vaisalaPlot.py -i <input data>
 #
 # Author: Ryosuke Tomita
 # Date: 2021/06/20
@@ -12,19 +12,23 @@ import os
 import re
 import numpy as np
 import matplotlib.pyplot as plt
+import argparse
 #made by tomita
 from readcsv import readcsv
 
 def getdateTime(data):
     matchObj = re.search('2.*[0-9]',str(data))
     return matchObj.group()
+
+#-------parser setting-------
+parser = argparse.ArgumentParser()
+parser.add_argument("-i","--input",help="Select input file",type=str)
+args = parser.parse_args()
+data = args.input
 #-------parameter setting-------
 HOME = os.getenv("HOME")
-dataDir = os.path.join(HOME + "/zonde/data")
-figDir = os.path.join(HOME + "/zonde/fig")
-PWD = os.getcwd()
-data = os.path.join(dataDir + "/mirai_rs41_20210619_2330.txt")
 datetime = getdateTime(data)
+figName = ("./fig/" + datetime)
 linestyle=["solid","dashed","dashdot","dotted"]
 
 x1Header = "Temp"
@@ -36,10 +40,9 @@ yHeader = "HeightMSL"
 readcsv = readcsv(data)
 df = readcsv.df
 x1 = readcsv[x1Header]
-print(df[x1Header])
 x2 = readcsv[x2Header]
 x3 = readcsv[x3Header]
-y = readcsv[yHeader]
+y  = readcsv[yHeader]
 x1label = readcsv.getLabel(x1Header)
 x2label = readcsv.getLabel(x2Header)
 x3label = readcsv.getLabel(x3Header)
@@ -126,7 +129,4 @@ h1, l1 = ax1.get_legend_handles_labels()
 h2, l2 = ax2.get_legend_handles_labels()
 h3, l3 = ax3.get_legend_handles_labels()
 ax1.legend(h1 + h2 +h3, l1 + l2 + l3, loc='upper left')
-figName = datetime
-os.chdir(figDir)
 fig.savefig(figName,bbox_inches="tight",pad_inches=0.5)
-os.chdir(PWD)
